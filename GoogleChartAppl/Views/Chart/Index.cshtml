@@ -1,0 +1,195 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+</head>
+<body>
+    <div style="overflow:hidden">
+        <div style="float:left">
+            <div id="chartspace" style="margin:0% 3% 0% 5%;"></div>
+            <div id="png" style="margin:0% 0% 0% 30%;"></div>
+        </div>
+        <div id="mapspace" style="margin:5% 0% 0% 0%; float:left"></div>
+    </div>
+    <div style="overflow:hidden">
+        <div id="diffchartspace" style="margin:0% 0% 0% 5%; float:left"></div>
+        <div id="comboChart" style="float:left"></div>
+    </div>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDucSpoWkWGH6n05GpjFLorktAzT1CuEc&callback=initMap"
+            type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function initMap() {
+        }
+        google.load("visualization", "1", { packages: ["corechart"] });
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "@Url.Action("GetData", "Chart")",
+                data: "{}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json",
+                success: function (data) {
+                    var chartData = new google.visualization.DataTable();
+                    chartData.addColumn('string', 'CategoryName');
+                    chartData.addColumn('number', 'CategorySales');
+                    for (var i = 0; i < data.length; i++) {
+                        //console.log("Im in Success");
+                        chartData.addRow([data[i].CategoryName, data[i].CategorySales]);
+                    }
+                    var chart = new google.visualization.PieChart(document.getElementById('chartspace'));
+                    google.visualization.events.addListener(chart, 'ready', function () {
+                        //console.log(chart.getImageURI());
+                        document.getElementById('png').outerHTML = '<a href="' + chart.getImageURI() + '">Rightclick - Open in new tab :: Printable version</a>';
+                    });
+                    chart.draw(chartData,
+                        {
+                            title: "Category Sales for 1997",
+                            titleTextStyle: {
+                                fontSize: 20,
+                                color: "Blue"
+                            },
+                            fontsize: "14px",
+                            is3D: "true",
+                            height: 500,
+                            width: 600,
+                            tooltip: {
+                                showColorCode: "true",
+                                isHtml: "true"
+                            }
+                        });
+
+                },
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+
+            $.ajax({
+                url: "@Url.Action("GetSupplierData", "Chart")",
+                data: "{}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json",
+                success: function (data) {
+                    var mapData = new google.visualization.DataTable();
+                    mapData.addColumn('string', 'Country');
+                    mapData.addColumn('number', 'NoOfSuppliers');
+                    for (var i = 0; i < data.length; i++) {
+                        //console.log("Im in Map Success");
+                        mapData.addRow([data[i].Country, data[i].NoOfSuppliers]);
+                    }
+                    var map = new google.visualization.GeoChart(document.getElementById('mapspace'));
+                    map.draw(mapData);
+                },
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+
+            $.ajax({
+                url: "@Url.Action("GetCategoryWiseSales_1996_1997", "Chart")",
+                data: "{}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json",
+                success: function (data) {
+                    var oldData = new google.visualization.DataTable();
+                    var newData = new google.visualization.DataTable();
+                    //Prev years data Datatable
+                    oldData.addColumn('string', 'CategoryName');
+                    oldData.addColumn('number', 'Sales');
+                    //oldData.addColumn('number', 'ShippingYear');
+                    //Next years data Datatable
+                    newData.addColumn('string', 'CategoryName');
+                    newData.addColumn('number', 'Sales');
+                    //newData.addColumn('number', 'ShippingYear');
+                    for (var i = 0; i < data.length; i++) {
+                        //console.log("Im in DiffChart Success");
+                        //Add only 1996 Data to oldData
+                        if (data[i].ShippingYear == 1996) {
+                            oldData.addRow([data[i].CategoryName, data[i].Sales]);
+                            console.log("1996 data");
+                        }
+                        else
+                            newData.addRow([data[i].CategoryName, data[i].Sales]);
+                    }
+                    var options = {
+                        height: 600,
+                        width: 600,
+                        legend: { position: 'none' },
+                        title: 'Category Wise Sales 1996_1997',
+                        vAxis: {
+                            title: 'Sales',
+                            format: 'currency'
+                        }
+                    };
+                    var chartDiffspace = new google.visualization.ColumnChart(document.getElementById('diffchartspace'));
+                    var diffData = chartDiffspace.computeDiff(oldData, newData);
+                    chartDiffspace.draw(diffData, options);
+                },
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+
+            $.ajax({
+                url: "@Url.Action("GetU_CategoryWiseTotalSales_1996_1997", "Chart")",
+                data: "{}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json",
+                success: function (data) {
+                    var Data = new google.visualization.DataTable();
+                    Data.addColumn('number', 'ShippingYear');
+                    Data.addColumn('number', 'Confections');
+                    Data.addColumn('number', 'Meat/Poultry');
+                    Data.addColumn('number', 'Condiments');
+                    Data.addColumn('number', 'Dairy Products');
+                    Data.addColumn('number', 'Beverages');
+                    Data.addColumn('number', 'Grains/Cereals');
+                    Data.addColumn('number', 'Seafood');
+                    Data.addColumn('number', 'Produce');
+                    //newData.addColumn('number', 'ShippingYear');
+                    for (var i = 0; i < data.length; i++) {
+                        //console.log("Im in ComboChart Success");
+                        Data.addRow([data[i].ShippingYear, data[i].Confections, data[i].Meat_Poultry, data[i].Condiments, data[i].Dairy_Products, data[i].Beverages, data[i].Grains_Cereals, data[i].Seafood, data[i].Produce]);
+                        console.log(data[i]);
+                        console.log("Inserting data");
+                    }
+                    var options = {
+                        title: 'Total Category Wise Sales 1996_1997',
+                        height: 600,
+                        width: 600,
+                        tooltip:{format: '####'},
+                        isStacked: true,
+                        vAxis: {
+                            title: 'Sales',
+                            format: 'currency'
+                        },
+                        hAxis: {
+                            title: 'ShippingYear',
+                            format: '####'
+                        }
+                    };
+                    var chartCombospace = new google.visualization.ColumnChart(document.getElementById('comboChart'));
+                    chartCombospace.draw(Data, options);
+                },
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NorthwindModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Northwind.dbo.Category Sales for 1997' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Category Sales for 1997">
+    <Key>
+      <PropertyRef Name="CategoryName" />
+    </Key>
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="CategorySales" Type="money" />
+  </EntityType>
+  <Function Name="CountOfSuppliersByCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="U_CategoryWiseSales_1996_1997" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="U_CategoryWiseTotalSales_1996_1997" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="NorthwindModelStoreContainer">
+    <EntitySet Name="Category Sales for 1997" EntityType="Self.Category Sales for 1997" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Category Sales for 1997].[CategoryName] AS [CategoryName], 
+    [Category Sales for 1997].[CategorySales] AS [CategorySales]
+    FROM [dbo].[Category Sales for 1997] AS [Category Sales for 1997]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NorthwindModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Northwind.dbo.Category Sales for 1997' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Category Sales for 1997">
+          <Key>
+            <PropertyRef Name="CategoryName" />
+          </Key>
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="CategorySales" Type="money" />
+        </EntityType>
+        <Function Name="CountOfSuppliersByCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="U_CategoryWiseSales_1996_1997" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="U_CategoryWiseTotalSales_1996_1997" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="NorthwindModelStoreContainer">
+          <EntitySet Name="Category Sales for 1997" EntityType="Self.Category Sales for 1997" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Category Sales for 1997].[CategoryName] AS [CategoryName], 
+    [Category Sales for 1997].[CategorySales] AS [CategorySales]
+    FROM [dbo].[Category Sales for 1997] AS [Category Sales for 1997]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NorthwindModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category_Sales_for_1997">
+          <Key>
+            <PropertyRef Name="CategoryName" />
+          </Key>
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategorySales" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityContainer Name="NorthwindEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category_Sales_for_1997" EntityType="Self.Category_Sales_for_1997" />
+          <FunctionImport Name="CountOfSuppliersByCountry" ReturnType="Collection(NorthwindModel.CountOfSuppliersByCountry_Result)" />
+          <FunctionImport Name="U_CategoryWiseSales_1996_1997" ReturnType="Collection(NorthwindModel.U_CategoryWiseSales_1996_1997_Result)" />
+          <FunctionImport Name="CategoryWiseSales_1996_1997" ReturnType="Collection(NorthwindModel.CategoryWiseSales_1996_1997_Result)" />
+          <FunctionImport Name="U_CategoryWiseTotalSales_1996_1997" ReturnType="Collection(NorthwindModel.U_CategoryWiseTotalSales_1996_1997_Result)" />
+        </EntityContainer>
+        <ComplexType Name="CountOfSuppliersByCountry_Result">
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="NoOfSuppliers" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="U_CategoryWiseSales_1996_1997_Result">
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="15" />
+          <Property Type="Decimal" Name="Sales" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="ShippingYear" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CategoryWiseSales_1996_1997_Result">
+          <Property Type="Int32" Name="ShippingYear" Nullable="true" />
+          <Property Type="Decimal" Name="Confections" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Meat_Poultry" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Condiments" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Dairy_Products" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Beverages" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Grains_Cereals" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Seafood" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Produce" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="U_CategoryWiseTotalSales_1996_1997_Result">
+          <Property Type="Int32" Name="ShippingYear" Nullable="true" />
+          <Property Type="Decimal" Name="Confections" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Meat_Poultry" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Condiments" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Dairy_Products" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Beverages" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Grains_Cereals" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Seafood" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Produce" Nullable="true" Precision="19" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NorthwindModelStoreContainer" CdmEntityContainer="NorthwindEntities">
+          <EntitySetMapping Name="Category_Sales_for_1997">
+            <EntityTypeMapping TypeName="NorthwindModel.Category_Sales_for_1997">
+              <MappingFragment StoreEntitySet="Category Sales for 1997">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategorySales" ColumnName="CategorySales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CountOfSuppliersByCountry" FunctionName="NorthwindModel.Store.CountOfSuppliersByCountry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NorthwindModel.CountOfSuppliersByCountry_Result">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="NoOfSuppliers" ColumnName="NoOfSuppliers" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="U_CategoryWiseSales_1996_1997" FunctionName="NorthwindModel.Store.U_CategoryWiseSales_1996_1997">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NorthwindModel.U_CategoryWiseSales_1996_1997_Result">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Sales" ColumnName="Sales" />
+                <ScalarProperty Name="ShippingYear" ColumnName="ShippingYear" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="U_CategoryWiseTotalSales_1996_1997" FunctionName="NorthwindModel.Store.U_CategoryWiseTotalSales_1996_1997">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NorthwindModel.U_CategoryWiseTotalSales_1996_1997_Result">
+                <ScalarProperty Name="ShippingYear" ColumnName="ShippingYear" />
+                <ScalarProperty Name="Confections" ColumnName="Confections" />
+                <ScalarProperty Name="Meat_Poultry" ColumnName="Meat/Poultry" />
+                <ScalarProperty Name="Condiments" ColumnName="Condiments" />
+                <ScalarProperty Name="Dairy_Products" ColumnName="Dairy Products" />
+                <ScalarProperty Name="Beverages" ColumnName="Beverages" />
+                <ScalarProperty Name="Grains_Cereals" ColumnName="Grains/Cereals" />
+                <ScalarProperty Name="Seafood" ColumnName="Seafood" />
+                <ScalarProperty Name="Produce" ColumnName="Produce" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

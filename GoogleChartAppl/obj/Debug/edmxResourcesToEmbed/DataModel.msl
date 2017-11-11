@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NorthwindModelStoreContainer" CdmEntityContainer="NorthwindEntities">
+    <EntitySetMapping Name="Category_Sales_for_1997">
+      <EntityTypeMapping TypeName="NorthwindModel.Category_Sales_for_1997">
+        <MappingFragment StoreEntitySet="Category Sales for 1997">
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategorySales" ColumnName="CategorySales" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CountOfSuppliersByCountry" FunctionName="NorthwindModel.Store.CountOfSuppliersByCountry">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NorthwindModel.CountOfSuppliersByCountry_Result">
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="NoOfSuppliers" ColumnName="NoOfSuppliers" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="U_CategoryWiseSales_1996_1997" FunctionName="NorthwindModel.Store.U_CategoryWiseSales_1996_1997">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NorthwindModel.U_CategoryWiseSales_1996_1997_Result">
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="ShippingYear" ColumnName="ShippingYear" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="U_CategoryWiseTotalSales_1996_1997" FunctionName="NorthwindModel.Store.U_CategoryWiseTotalSales_1996_1997">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NorthwindModel.U_CategoryWiseTotalSales_1996_1997_Result">
+          <ScalarProperty Name="ShippingYear" ColumnName="ShippingYear" />
+          <ScalarProperty Name="Confections" ColumnName="Confections" />
+          <ScalarProperty Name="Meat_Poultry" ColumnName="Meat/Poultry" />
+          <ScalarProperty Name="Condiments" ColumnName="Condiments" />
+          <ScalarProperty Name="Dairy_Products" ColumnName="Dairy Products" />
+          <ScalarProperty Name="Beverages" ColumnName="Beverages" />
+          <ScalarProperty Name="Grains_Cereals" ColumnName="Grains/Cereals" />
+          <ScalarProperty Name="Seafood" ColumnName="Seafood" />
+          <ScalarProperty Name="Produce" ColumnName="Produce" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

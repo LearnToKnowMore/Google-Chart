@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NorthwindModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category_Sales_for_1997">
+    <Key>
+      <PropertyRef Name="CategoryName" />
+    </Key>
+    <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategorySales" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityContainer Name="NorthwindEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Category_Sales_for_1997" EntityType="Self.Category_Sales_for_1997" />
+    <FunctionImport Name="CountOfSuppliersByCountry" ReturnType="Collection(NorthwindModel.CountOfSuppliersByCountry_Result)" />
+    <FunctionImport Name="U_CategoryWiseSales_1996_1997" ReturnType="Collection(NorthwindModel.U_CategoryWiseSales_1996_1997_Result)" />
+    <FunctionImport Name="CategoryWiseSales_1996_1997" ReturnType="Collection(NorthwindModel.CategoryWiseSales_1996_1997_Result)" />
+    <FunctionImport Name="U_CategoryWiseTotalSales_1996_1997" ReturnType="Collection(NorthwindModel.U_CategoryWiseTotalSales_1996_1997_Result)" />
+  </EntityContainer>
+  <ComplexType Name="CountOfSuppliersByCountry_Result">
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="NoOfSuppliers" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="U_CategoryWiseSales_1996_1997_Result">
+    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="15" />
+    <Property Type="Decimal" Name="Sales" Nullable="true" Precision="19" />
+    <Property Type="Int32" Name="ShippingYear" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="CategoryWiseSales_1996_1997_Result">
+    <Property Type="Int32" Name="ShippingYear" Nullable="true" />
+    <Property Type="Decimal" Name="Confections" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Meat_Poultry" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Condiments" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Dairy_Products" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Beverages" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Grains_Cereals" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Seafood" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Produce" Nullable="true" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="U_CategoryWiseTotalSales_1996_1997_Result">
+    <Property Type="Int32" Name="ShippingYear" Nullable="true" />
+    <Property Type="Decimal" Name="Confections" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Meat_Poultry" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Condiments" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Dairy_Products" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Beverages" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Grains_Cereals" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Seafood" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Produce" Nullable="true" Precision="19" />
+  </ComplexType>
+</Schema>
